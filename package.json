@@ -1,0 +1,42 @@
+{
+  "name": "claude-finance-agents",
+  "version": "1.0.0",
+  "description": "Production-grade AI agents for financial services operations, built with the [Claude Agent SDK](https://code.claude.com/docs/en/agent-sdk/overview), [Model Context Protocol (MCP)](https://modelcontextprotocol.io/docs/getting-started/intro), and [Claude Code](https://code.claude.com/docs/en/overview).",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "build": "tsc",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "dev": "tsx watch src/index.ts",
+    "lint": "eslint src/ --ext .ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paul-byford/claude-finance-agents.git"
+  },
+  "keywords": [],
+  "author": "Paul Byford",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "bugs": {
+    "url": "https://github.com/paul-byford/claude-finance-agents/issues"
+  },
+  "homepage": "https://github.com/paul-byford/claude-finance-agents#readme",
+  "dependencies": {
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.0",
+    "eslint": "^10.2.1",
+    "tsx": "^4.21.0",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.5"
+  }
+}
