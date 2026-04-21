@@ -8,7 +8,7 @@ Each build maps to a domain tested by the [Claude Certified Architect (CCA) Foun
 
 [Anthropic's Academy courses](https://www.anthropic.com/learn) teach Claude development concepts. The CCA exam tests practical architectural judgement. There is no worked path between the two.
 
-This repository is that path. Each build implements specific agent patterns in an asset management context, encounters the real tradeoffs the exam tests, and documents what was learned along the way. The financial services contextualisation is deliberate: regulated environments force better architectural decisions around deterministic compliance, structured error handling, multi-source reconciliation, and escalation boundaries.
+This repository is that path. Each build implements specific agent patterns in a financial services industry context, focusing on the asset management sector. Each build encounters the real tradeoffs the exam tests, and documents what was learned along the way. The financial services contextualisation is deliberate: regulated environments force better architectural decisions around deterministic compliance, structured error handling, multi-source reconciliation, and escalation boundaries.
 
 A structured interpretation of the full CCA exam guide, mapped to each build, is maintained in [`docs/cca-exam-reference.md`](docs/cca-exam-reference.md). It covers all five domains, all six scenarios with key decision points and common distractors, 21 anti-patterns organised by domain, and a quick reference summary.
 
