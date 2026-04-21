@@ -120,7 +120,7 @@ npm run dev          # Run in development mode
 
 ## CCA exam reference
 
-The [`docs/cca-exam-reference.md`](docs/cca-exam-reference.md) file is a structured interpretation of the official CCA Foundations exam guide, maintained as a working study document alongside the builds. It includes:
+The [`docs/cca-exam-reference.md`](docs/cca-exam-reference.md) file is a structured interpretation of the [official CCA Foundations exam guide](docs/claude-certified-architect-foundations-exam-guide.pdf), maintained as a working study document alongside the builds. It includes:
 
 - All 5 domains with every task statement mapped to a specific build
 - All 6 exam scenarios with key decision points and common distractors
