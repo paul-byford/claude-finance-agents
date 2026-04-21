@@ -106,32 +106,13 @@ Rules load conditionally based on which files are being edited, reducing irrelev
 
 ## Getting started
 
+Start with [Build 0](docs/build-0-plan.md). It walks you through creating the entire project from scratch: initialising the TypeScript project, installing dependencies, creating the CLAUDE.md configuration hierarchy, writing the shared types and utilities, and building fluency with Claude Code's features.
+
 ### Prerequisites
 
 - Node.js 20 or later
 - An Anthropic API key
 - Claude Code installed (`npm install -g @anthropic-ai/claude-code`)
-
-### Setup
-
-```bash
-git clone https://github.com/paul-byford/claude-finance-agents.git
-cd claude-finance-agents
-npm install
-cp .env.example .env
-# Add your ANTHROPIC_API_KEY to .env
-```
-
-### Commands
-
-```bash
-npm run build        # Compile TypeScript
-npm run test         # Run test suite
-npm run test:watch   # Run tests in watch mode
-npm run lint         # Run ESLint
-npm run typecheck    # Type check without emitting
-npm run dev          # Run in development mode
-```
 
 ## Financial domain model
 
