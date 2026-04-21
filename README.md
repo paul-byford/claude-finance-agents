@@ -1,85 +1,82 @@
 # claude-finance-agents
 
-A series of production-pattern agent builds for financial services operations, using the [Claude Agent SDK](https://code.claude.com/docs/en/agent-sdk/overview), [Model Context Protocol (MCP)](https://modelcontextprotocol.io/docs/getting-started/intro), and [Claude Code](https://code.claude.com/docs/en/overview).
+Production-grade AI agents for financial services operations, built with the [Claude Agent SDK](https://code.claude.com/docs/en/agent-sdk/overview), [Model Context Protocol (MCP)](https://modelcontextprotocol.io/docs/getting-started/intro), and [Claude Code](https://code.claude.com/docs/en/overview).
 
-Each build maps to a domain tested by the [Claude Certified Architect (CCA) Foundations](https://www.anthropic.com/news/claude-partner-network) exam and applies it to a real financial services use case. 
-
-The result is a working reference implementation that demonstrates how agentic AI systems connect to the operational reality of asset management: trade processing, NAV reconciliation, exception handling, regulatory document extraction, and client operations.
+Each build maps to a domain tested by the [Claude Certified Architect (CCA) Foundations](https://www.anthropic.com/news/claude-partner-network) exam and applies it to a real financial services use case: trade processing, NAV reconciliation, exception handling, document extraction, and client operations.
 
 ## Why this exists
 
 [Anthropic's Academy courses](https://www.anthropic.com/learn) teach Claude development concepts. The CCA exam tests practical architectural judgement. There is no worked path between the two.
 
-This repository is that path. It documents the full journey from "completed the courses" to "can design and ship production-grade agent systems," with every implementation decision grounded in a financial services context that makes the patterns commercially relevant rather than academic.
+This repository is that path. Each build implements specific agent patterns in an asset management context, encounters the real tradeoffs the exam tests, and documents what was learned along the way. The financial services contextualisation is deliberate: regulated environments force better architectural decisions around deterministic compliance, structured error handling, multi-source reconciliation, and escalation boundaries.
+
+A structured interpretation of the full CCA exam guide, mapped to each build, is maintained in [`docs/cca-exam-reference.md`](docs/cca-exam-reference.md). It covers all five domains, all six scenarios with key decision points and common distractors, 21 anti-patterns organised by domain, and a quick reference summary.
 
 ## What gets built
 
-The project follows a deliberate sequence. Each build depends on the one before it.
+The project follows a deliberate sequence. Each build depends on the one before it, and the CI/CD pipeline established in Build 1 provides automated review for everything that follows.
 
-### Build 0: Environment and Claude Code
+### Build 0: Environment and Claude Code fluency
+
+Project scaffold, CLAUDE.md configuration hierarchy, path-specific rules in `.claude/rules/`, and TypeScript setup. Establishes the Claude Code working environment that all subsequent builds run through.
 
 **CCA domains:** Claude Code Configuration & Workflows
 
-Project scaffold, CLAUDE.md configuration hierarchy, path-specific rules in `.claude/rules/`, and initial TypeScript setup. Establishes the Claude Code working environment that all subsequent builds run through.
-
 ### Build 1: CI/CD integration with Claude Code
+
+Automated code review pipeline using Claude Code in non-interactive mode (`-p` flag). Structured output via `--output-format json` with `--json-schema` for machine-parseable review findings. Multi-pass review architecture: per-file analysis plus cross-file integration pass. This pipeline then reviews every PR for Builds 2 through 5.
 
 **CCA domains:** Claude Code Configuration & Workflows, Prompt Engineering & Structured Output
 
-Automated code review pipeline using Claude Code in non-interactive mode (`-p` flag). Structured output via `--output-format json` with `--json-schema` for machine-parseable review findings. Multi-pass review architecture: per-file analysis plus cross-file integration pass.
-
-This pipeline then reviews every PR for Builds 2 through 5, providing longitudinal experience with the patterns the exam tests.
-
 ### Build 2: Structured data extraction from financial documents
-
-**CCA domains:** Prompt Engineering & Structured Output, Context Management & Reliability
 
 Extraction pipeline for trade confirmations, NAV statements, and fund fact sheets using the Claude API with `tool_use` and JSON schemas. Covers schema design (required vs optional fields, nullable fields to prevent hallucination, enum + "other" patterns), `tool_choice` configuration, validation-retry loops with error feedback, few-shot examples for varied document formats, and batch processing via the Message Batches API.
 
-### Build 3: MCP server for financial data operations
+**CCA domains:** Prompt Engineering & Structured Output, Context Management & Reliability
 
-**CCA domains:** Tool Design & MCP Integration
+### Build 3: MCP server for financial data operations
 
 Custom MCP server exposing financial data tools: trade lookup, position checking, counterparty validation, exception logging. Focuses on tool description design to prevent misrouting between similar tools, structured error responses with the `isError` flag pattern (`errorCategory`, `isRetryable`, human-readable descriptions), and tool distribution principles.
 
-### Build 4: Single-agent client operations with escalation logic
+**CCA domains:** Tool Design & MCP Integration
 
-**CCA domains:** Agentic Architecture & Orchestration, Tool Design & MCP Integration, Context Management & Reliability
+### Build 4: Single-agent client operations with escalation logic
 
 Customer operations agent using the Claude Agent SDK for an asset management operations context. Implements the agentic loop lifecycle (`stop_reason` handling), programmatic prerequisite hooks (blocking settlement processing until counterparty verification completes), `PostToolUse` hooks for data normalisation, and escalation logic with explicit criteria and few-shot examples.
 
-### Build 5: Multi-agent reconciliation system
-
 **CCA domains:** Agentic Architecture & Orchestration, Tool Design & MCP Integration, Context Management & Reliability
+
+### Build 5: Multi-agent reconciliation system
 
 Coordinator agent delegating to specialised subagents for trade data retrieval, position data retrieval, reconciliation logic, and exception reporting. Covers hub-and-spoke architecture, isolated subagent context, parallel subagent spawning via multiple `Task` tool calls, iterative refinement loops, context management across agents, information provenance preservation, and conflicting data handling with source attribution.
 
-## Architecture
+**CCA domains:** Agentic Architecture & Orchestration, Tool Design & MCP Integration, Context Management & Reliability
+
+## Project structure
 
 ```
-src/
-  agents/          # Agent implementations (Claude Agent SDK)
-  mcp-servers/     # Custom MCP server implementations
-  tools/           # Tool definitions and JSON schemas
-  types/           # Shared TypeScript types (Trade, Position, NAV, etc.)
-  utils/           # Shared utilities (structured errors, data normalisation)
-docs/              # Build log and learning notes
-data/              # Sample financial documents for extraction testing
+claude-finance-agents/
+├── CLAUDE.md                        # Project-level conventions for Claude Code
+├── .claude/
+│   └── rules/                       # Path-specific conventions (YAML frontmatter glob patterns)
+│       ├── agents.md                # src/agents/**/*
+│       ├── mcp-servers.md           # src/mcp-servers/**/*
+│       └── testing.md               # **/*.test.ts
+├── .mcp.json                        # Project-scoped MCP server configuration
+├── src/
+│   ├── agents/                      # Agent implementations (Claude Agent SDK)
+│   ├── mcp-servers/                 # Custom MCP server implementations
+│   ├── tools/                       # Tool definitions and JSON schemas
+│   ├── types/                       # Shared TypeScript types (Trade, Position, NAV, etc.)
+│   └── utils/                       # Shared utilities (structured errors, data normalisation)
+├── docs/
+│   └── cca-exam-reference.md        # Structured CCA exam guide interpretation
+├── data/                            # Sample financial documents for extraction testing
+└── .github/
+    └── workflows/                   # CI/CD pipeline (Build 1)
 ```
 
-### Claude Code configuration
-
-The project uses the full CLAUDE.md hierarchy and path-specific rules that the CCA exam tests:
-
-```
-CLAUDE.md                          # Project-level conventions
-.claude/rules/testing.md           # Glob-scoped: **/*.test.ts
-.claude/rules/agents.md            # Glob-scoped: src/agents/**/*
-.claude/rules/mcp-servers.md       # Glob-scoped: src/mcp-servers/**/*
-.mcp.json                          # Project-scoped MCP server config
-```
-
-Rules load conditionally based on which files are being edited, reducing irrelevant context and token usage.
+The Claude Code configuration uses the full CLAUDE.md hierarchy and path-specific rules that the CCA exam tests. Rules load conditionally based on which files are being edited, reducing irrelevant context and token usage.
 
 ## Tech stack
 
@@ -121,17 +118,17 @@ npm run typecheck    # Type check without emitting
 npm run dev          # Run in development mode
 ```
 
-## Financial domain model
+## CCA exam reference
 
-The shared type system covers the core data structures that flow through all agent builds:
+The [`docs/cca-exam-reference.md`](docs/cca-exam-reference.md) file is a structured interpretation of the official CCA Foundations exam guide, maintained as a working study document alongside the builds. It includes:
 
-- **Trade** and **Position** types for trade lifecycle and portfolio state
-- **NavStatement** with line items for fund valuation
-- **Counterparty** with KYC status and LEI identifiers
-- **ReconciliationBreak** with severity levels and resolution tracking
-- **ExtractionResult** with field-level confidence scores
-- **EscalationSummary** with structured handoff data for human review
-- **StructuredError** implementing the MCP `isError` pattern with error categories and retry flags
+- All 5 domains with every task statement mapped to a specific build
+- All 6 exam scenarios with key decision points and common distractors
+- 21 anti-patterns organised by domain with severity ratings and correct approach pairings
+- Sample question answer key with the principle each question tests
+- A 12-point quick reference for last-minute review
+- Readiness checkboxes for tracking progress against each task statement
+- Links to practice resources including community sites and Anthropic Academy
 
 ## Build log
 
@@ -139,7 +136,7 @@ Implementation notes and learning observations are documented in `docs/` as each
 
 ## Context
 
-This project is part of a broader specialisation in the Claude AI ecosystem for financial services - focusing on asset management. It was built using Claude Code as the primary development environment, preparing for the Claude Certified Architect (Foundations) certification while establishing practical implementation expertise that applies directly to enterprise financial services deployments.
+This project is part of a broader specialisation in the Claude AI ecosystem for financial services, focusing on asset management. It was built using Claude Code as the primary development environment, preparing for the Claude Certified Architect (Foundations) certification while establishing practical implementation expertise that applies directly to enterprise financial services deployments.
 
 Built by [Paul Byford](https://www.linkedin.com/in/paulbyford/), an AI engineer working in financial services technology across asset management, banking, and capital markets.
 
