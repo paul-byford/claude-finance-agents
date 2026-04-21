@@ -2,7 +2,7 @@
 
 A working interpretation of the Claude Certified Architect (Foundations) exam guide, mapped to the builds in this project. Use this document to track readiness against each task statement and to identify gaps before sitting the exam.
 
-Source: [Claude Certified Architect -- Foundations Certification Exam Guide](docs/claude-certified-architect-foundations-exam-guide.pdf) (Version 0.1, Feb 10 2025)
+Source: [Claude Certified Architect -- Foundations Certification Exam Guide](claude-certified-architect-foundations-exam-guide.pdf) (Version 0.1, Feb 10 2025)
 
 ---
 
