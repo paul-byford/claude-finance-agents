@@ -45,9 +45,9 @@ The reference for building with the Claude API directly: messages API, tool use,
 The specification and guides for the Model Context Protocol. You will use this in Build 3 when building custom MCP servers. Key sections:
 
 - [Introduction](https://modelcontextprotocol.io/docs/getting-started/intro) — what MCP is, architecture, client-server model
-- [Building servers](https://modelcontextprotocol.io/docs/getting-started/building-servers) — creating MCP servers with the TypeScript SDK
-- [Tools](https://modelcontextprotocol.io/docs/concepts/tools) — defining tools, descriptions, input schemas
-- [Resources](https://modelcontextprotocol.io/docs/concepts/resources) — exposing content catalogues to reduce exploratory tool calls
+- [Building servers](https://modelcontextprotocol.io/docs/develop/build-server) — creating MCP servers with the TypeScript SDK
+- [Tools](https://modelcontextprotocol.io/specification/2025-06-18/server/tools) — defining tools, descriptions, input schemas
+- [Resources](https://modelcontextprotocol.io/specification/2025-06-18/server/resources) — exposing content catalogues to reduce exploratory tool calls
 
 **Anthropic Academy** — [anthropic.skilljar.com](https://anthropic.skilljar.com/)
 The 13 free courses covering foundational concepts. Useful as a refresher, but the documentation above is the primary reference for implementation details.
