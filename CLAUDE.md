@@ -70,3 +70,4 @@ Target directory structure (not yet fully created):
 - Do not create README or documentation files unless explicitly asked.
 - Do not use `console.log` for observability -- use structured logging.
 - Do not add backwards-compatibility shims for removed code.
+
