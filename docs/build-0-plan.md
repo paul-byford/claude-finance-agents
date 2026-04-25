@@ -35,8 +35,8 @@ The main reference for Claude Code: installation, configuration, built-in tools,
 The reference for building with the Claude API directly: messages API, tool use, JSON schemas, batch processing, streaming. Also hosts the Agent SDK documentation. You will use this heavily from Build 2 onwards. Key sections:
 
 - [Messages API](https://platform.claude.com/docs/en/api/messages) — the core API for sending prompts and receiving responses
-- [Tool use](https://platform.claude.com/docs/en/api/tool-use) — defining tools, `tool_choice`, structured output via `tool_use`
-- [Batch API](https://platform.claude.com/docs/en/api/batches) — Message Batches API for 50% cost savings on latency-tolerant workloads
+- [Tool use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview) — defining tools, `tool_choice`, structured output via `tool_use`
+- [Batch API](https://platform.claude.com/docs/en/build-with-claude/batch-processing) — Message Batches API for 50% cost savings on latency-tolerant workloads
 - [Agent SDK overview](https://platform.claude.com/docs/en/agent-sdk/overview) — the SDK that powers agent builds 4 and 5
 - [Agent SDK quickstart](https://platform.claude.com/docs/en/agent-sdk/quickstart) — building your first agent
 - [TypeScript SDK reference](https://platform.claude.com/docs/en/agent-sdk/typescript) — full API reference for the Agent SDK
@@ -45,9 +45,9 @@ The reference for building with the Claude API directly: messages API, tool use,
 The specification and guides for the Model Context Protocol. You will use this in Build 3 when building custom MCP servers. Key sections:
 
 - [Introduction](https://modelcontextprotocol.io/docs/getting-started/intro) — what MCP is, architecture, client-server model
-- [Building servers](https://modelcontextprotocol.io/docs/getting-started/building-servers) — creating MCP servers with the TypeScript SDK
-- [Tools](https://modelcontextprotocol.io/docs/concepts/tools) — defining tools, descriptions, input schemas
-- [Resources](https://modelcontextprotocol.io/docs/concepts/resources) — exposing content catalogues to reduce exploratory tool calls
+- [Building servers](https://modelcontextprotocol.io/docs/develop/build-server) — creating MCP servers with the TypeScript SDK
+- [Tools](https://modelcontextprotocol.io/specification/2025-06-18/server/tools) — defining tools, descriptions, input schemas
+- [Resources](https://modelcontextprotocol.io/specification/2025-06-18/server/resources) — exposing content catalogues to reduce exploratory tool calls
 
 **Anthropic Academy** — [anthropic.skilljar.com](https://anthropic.skilljar.com/)
 The 13 free courses covering foundational concepts. Useful as a refresher, but the documentation above is the primary reference for implementation details.
