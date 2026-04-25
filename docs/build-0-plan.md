@@ -251,7 +251,8 @@ git commit -m "feat: add CLAUDE.md, path-specific rules, and MCP config"
 
 **Read first:**
 - [Best practices](https://code.claude.com/docs/en/best-practices) — plan mode workflow (the four-phase pattern: explore, plan, implement, verify), context window management
-- [Built-in tools reference](https://code.claude.com/docs/en/how-claude-code-works) — Read, Write, Edit, Bash, Grep, Glob and when to use each
+- [Built-in tools overview](https://code.claude.com/docs/en/how-claude-code-works) — introduction to the agentic loop and built-in tools
+- [Built-in tools reference](https://code.claude.com/docs/en/tools-reference) — detailed reference for Read, Write, Edit, Bash, Grep, Glob and when to use each
 
 This phase serves two purposes: you create the foundational types and utilities that all later builds depend on, and you practice using Claude Code's different modes and built-in tools while doing so.
 
